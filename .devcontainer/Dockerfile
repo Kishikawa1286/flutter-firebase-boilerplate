@@ -1,28 +1,30 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04
-
-ARG WORKSPACE_NAME=flutter_firebse
-ARG WORKSPACE_PATH=/workspaces/flutter_firebse
+FROM ubuntu:jammy
 
 # Also Specified in devcontainer.json
 ARG USERNAME=vscode
 ARG NODE_VERSION=18
 
-RUN apt-get update && \
-    # Install npm with apt to use n
-    apt-get install -y --no-install-recommends \
-    nodejs npm
+ENV DEBIAN_FRONTEND noninteractive
 
-# Grant access for the devcontainer user
-RUN mkdir -p /usr/local/share/npm-global/lib \
-    && chown -R vscode /usr/local/share/npm-global/lib
-RUN mkdir -p ${WORKSPACE_PATH}/firebase/functions/node_modules \
-    && chown -R vscode ${WORKSPACE_PATH}
+RUN useradd ${USERNAME}
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    # Install npm with apt to use n
+    nodejs npm \
+    # Install utils
+    wget curl gpg git
 
 # Install Node
 RUN npm install -g n
 RUN n ${NODE_VERSION}
 # Install Firebase CLI
 RUN npm install -g firebase-tools
+
+RUN mkdir -p /usr/local/share/npm-global/lib && \
+    chown -R ${USERNAME} /usr/local/share/npm-global/lib
+RUN mkdir -p /home/${USERNAME} && \
+    chown ${USERNAME}:${USERNAME} /home/${USERNAME}
 
 # Install Dart
 # See: https://dart.dev/get-dart
@@ -41,6 +43,3 @@ USER ${USERNAME}
 RUN dart pub global activate fvm && \
     dart pub global activate flutterfire_cli
 ENV PATH $PATH:/home/${USERNAME}/.pub-cache/bin
-
-RUN mkdir -p ${WORKSPACE_PATH}
-WORKDIR ${WORKSPACE_PATH}

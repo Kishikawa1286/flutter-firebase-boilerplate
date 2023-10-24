@@ -1,0 +1,8 @@
+{
+  "eslint.codeActionsOnSave.rules": ["!@typescript-eslint/*", "*"],
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.tabSize": 2
+  }
+}

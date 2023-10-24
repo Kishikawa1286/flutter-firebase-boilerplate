@@ -1,16 +1,20 @@
 {
-    "folders": [
-        {
-            "name": "Root",
-            "path": "."
-        },
-        {
-            "name": "Firebase",
-            "path": "./firebase"
-        },
-        {
-            "name": "Flutter",
-            "path": "./flutter"
-        }
-    ]
+  "folders": [
+    {
+      "name": "Root",
+      "path": "."
+    },
+    {
+      "name": "Firebase",
+      "path": "./firebase"
+    },
+    {
+      "name": "Flutter",
+      "path": "./flutter"
+    }
+  ],
+  "settings": {
+    "dart.projectSearchDepth": 7,
+    "build_runner.fvm": true
+  }
 }

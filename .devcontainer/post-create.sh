@@ -1,9 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-WORKSPACE_ROOT="/workspaces/flutter_firebse"
+SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
 # Install Flutter
 fvm install
 
+sudo mkdir -p ${SCRIPT_DIR}/../firebase/functions/node_modules
+sudo chown -R $(whoami) ${SCRIPT_DIR}
+
 # Install npm dependencies for Firebase Functions
-npm --prefix "$WORKSPACE_ROOT/functions" install
+npm --prefix "${SCRIPT_DIR}/../firebase/functions" install

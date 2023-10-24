@@ -1,59 +1,41 @@
 {
-    "name": "flutter_firebse",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
-    "postCreateCommand": "sh ./.devcontainer/post-create.sh",
-    "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind,consistency=cached",
-    "workspaceFolder": "/workspaces/flutter_firebse",
-    "mounts": [
-        // See: https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-targeted-named-volume
-        "source=${localWorkspaceFolderBasename}-functions-node_modules,target=${containerWorkspaceFolder}/firebase/functions/node_modules,type=volume",
-        "source=${localWorkspaceFolderBasename}-global-node_modules,target=/usr/local/share/npm-global/lib/node_modules,type=volume"
-    ],
-    "overrideCommand": false,
-    "remoteUser": "vscode",
-    "features": {
-        "ghcr.io/dhoeric/features/google-cloud-cli:1": {}
-    },
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "editor.formatOnSave": true,
-                "editor.codeActionsOnSave": {
-                    "source.fixAll.eslint": true,
-                    "source.organizeImports": true
-                },
-                // Flutter settings
-                "dart.projectSearchDepth": 7,
-                "build_runner.fvm": true,
-                "[dart]": {
-                    "editor.formatOnType": true,
-                    "editor.rulers": [80],
-                    "editor.selectionHighlight": false,
-                    "editor.suggest.snippetsPreventQuickSuggestions": false,
-                    "editor.suggestSelection": "first",
-                    "editor.tabCompletion": "onlySnippets",
-                    "editor.wordBasedSuggestions": false
-                },
-                // Typescript settings
-                "eslint.codeActionsOnSave.rules": ["!@typescript-eslint/*", "*"],
-                "eslint.workingDirectories": [{ "mode": "auto" }],
-                "editor.defaultFormatter": "esbenp.prettier-vscode",
-                "[typescript]": {
-                    "editor.tabSize": 2
-                }
-            },
-            "extensions": [
-                "dbaeumer.vscode-eslint",
-                "christian-kohler.npm-intellisense",
-                "unional.vscode-sort-package-json",
-                "esbenp.prettier-vscode",
-                "dart-code.flutter",
-                "dart-code.dart-code",
-                "redhat.vscode-yaml",
-                "kaiqun.build-runner"
-            ]
-        }
+  "name": "flutter_firebase",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "postCreateCommand": "bash ./.devcontainer/post-create.sh",
+  "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind,consistency=cached",
+  "mounts": [
+    // See: https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-targeted-named-volume
+    "source=${localWorkspaceFolderBasename}-functions-node_modules,target=${containerWorkspaceFolder}/firebase/functions/node_modules,type=volume",
+    "source=${localWorkspaceFolderBasename}-global-node_modules,target=/usr/local/share/npm-global/lib/node_modules,type=volume"
+  ],
+  "remoteUser": "vscode",
+  "features": {
+    "ghcr.io/dhoeric/features/google-cloud-cli:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "configureZshAsDefaultShell": true
     }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true,
+          "source.organizeImports": true
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "christian-kohler.npm-intellisense",
+        "unional.vscode-sort-package-json",
+        "esbenp.prettier-vscode",
+        "dart-code.flutter",
+        "dart-code.dart-code",
+        "redhat.vscode-yaml",
+        "kaiqun.build-runner"
+      ]
+    }
+  }
 }
