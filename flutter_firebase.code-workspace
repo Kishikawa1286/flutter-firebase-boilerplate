@@ -15,6 +15,7 @@
   ],
   "settings": {
     "dart.projectSearchDepth": 7,
-    "build_runner.fvm": true
+    "build_runner.fvm": true,
+    "dart.flutterSdkPath": ".fvm/flutter_sdk/bin"
   }
 }

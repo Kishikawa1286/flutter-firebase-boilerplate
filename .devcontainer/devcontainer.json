@@ -10,6 +10,7 @@
     "source=${localWorkspaceFolderBasename}-functions-node_modules,target=${containerWorkspaceFolder}/firebase/functions/node_modules,type=volume",
     "source=${localWorkspaceFolderBasename}-global-node_modules,target=/usr/local/share/npm-global/lib/node_modules,type=volume"
   ],
+  "forwardPorts": [3000],
   "remoteUser": "vscode",
   "features": {
     "ghcr.io/dhoeric/features/google-cloud-cli:1": {},

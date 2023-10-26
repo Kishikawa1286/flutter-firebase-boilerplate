@@ -55,7 +55,7 @@ bash setup-flutter.sh
 `flutter/` に移動して次のコマンドを実行することでもデバッグできます.
 
 ```bash
-fvm flutter run -d web-server --dart-define-from-file=dart_defines/dev.json
+fvm flutter run -d web-server --web-hostname=0.0.0.0 --web-port=3000 --dart-define-from-file=dart_defines/dev.json
 ```
 
 ## デプロイ
