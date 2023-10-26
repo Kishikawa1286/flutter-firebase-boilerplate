@@ -3,6 +3,10 @@
 # This script is run by the firebase predeploy hook
 # See firebase.json
 
+SCRIPT_DIR=$(dirname $(readlink -f "$0"))
+
+FIREBASERC_PATH="${SCRIPT_DIR}/firebase/.firebaserc"
+
 project_to_alias() {
   PROJECT_NAME=$1
   ALIAS_NAME=$(jq -r "to_entries[] | select(.value == \"$PROJECT_NAME\").key" $FIREBASERC_PATH)
@@ -14,6 +18,11 @@ project_to_alias() {
     exit 0
   fi
 }
+
+if [ -z "$GCLOUD_PROJECT" ] || [ -z "$RESOURCE_DIR" ]; then
+  echo "Error: Required environment variables are not set."
+  exit 1
+fi
 
 rm -rf \"$RESOURCE_DIR\"
 
