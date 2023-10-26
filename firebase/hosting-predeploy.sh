@@ -5,11 +5,11 @@
 
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
-FIREBASERC_PATH="${SCRIPT_DIR}/firebase/.firebaserc"
+FIREBASERC_PATH="${SCRIPT_DIR}/.firebaserc"
 
 project_to_alias() {
   PROJECT_NAME=$1
-  ALIAS_NAME=$(jq -r "to_entries[] | select(.value == \"$PROJECT_NAME\").key" $FIREBASERC_PATH)
+  ALIAS_NAME=$(jq -r ".projects | to_entries[] | select(.value == \"$PROJECT_NAME\").key" $FIREBASERC_PATH)
 
   if [ -z "$ALIAS_NAME" ]; then
     exit 1
@@ -24,7 +24,7 @@ if [ -z "$GCLOUD_PROJECT" ] || [ -z "$RESOURCE_DIR" ]; then
   exit 1
 fi
 
-rm -rf \"$RESOURCE_DIR\"
+rm -rf $RESOURCE_DIR
 
 cd ../flutter
 ALIAS=$(project_to_alias $GCLOUD_PROJECT)
